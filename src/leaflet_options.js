@@ -2,7 +2,8 @@
 
 var L = require('leaflet');
 
-var mapboxTileURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+var mapboxTileURL = 'http://10.10.4.52:8005/geoserver/gwc/service/tms/1.0.0/INDIA_V1/{z}/{x}/{-y}.png',
+// var mapboxTileURL = 'http://mt1.google.com/vt/lyrs=m@110&hl=${lcl}&x={x}&y={y}&z={z}',
     mapboxAttribution = '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
     mapboxToken = 'pk.eyJ1IjoibXNsZWUiLCJhIjoiclpiTWV5SSJ9.P_h8r37vD8jpIH1A6i1VRg',
     osmAttribution = '© <a href="https://www.openstreetmap.org/copyright/en">OpenStreetMap</a> contributors',
@@ -29,10 +30,16 @@ var streets = L.tileLayer(mapboxTileURL, {
     id: 'mapbox/satellite-streets-v11',
     accessToken: mapboxToken
   }),
-  osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // osm = L.tileLayer('http://10.10.4.52:8005/geoserver/gwc/service/tms/1.0.0/INDIA_V1/{z}/{x}/{-y}.png', {
+  //   attribution: osmAttribution,
+  // }),
+  // osm = L.tileLayer('http://10.10.4.52:8005/INDIA_V3/{z}/{x}/{-y}.png', {
+  //   attribution: osmAttribution,
+  // }),
+  osm = L.tileLayer('https://mt1.google.com/vt/lyrs=m@110&hl=$%7Blcl%7D&x={x}&y={y}&z={z}', {
     attribution: osmAttribution,
   }),
-  osm_de = L.tileLayer('https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', {
+  osm_de = L.tileLayer('http://10.10.4.52:8005/INDIA_V3/{z}/{x}/{-y}.png', {
     attribution: osmAttribution,
   }),
   hiking = L.tileLayer('https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png', {
@@ -45,7 +52,7 @@ var streets = L.tileLayer(mapboxTileURL, {
 
 module.exports = {
   defaultState: {
-    center: L.latLng(38.8995,-77.0269),
+    center: L.latLng(12.92052027305486,77.57254336767198),
     zoom: 13,
     waypoints: [],
     language: 'en',
@@ -54,7 +61,7 @@ module.exports = {
   },
   services: [{
     label: 'Car (fastest)',
-    path: 'https://router.project-osrm.org/route/v1'
+    path: 'http://10.10.4.52:5002/route/v1'
   }],
   layer: [{
     'Mapbox Streets': streets,
